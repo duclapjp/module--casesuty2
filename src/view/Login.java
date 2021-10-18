@@ -1,6 +1,5 @@
 package view;
 
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import controller.UserManager;
 import molder.login.User;
 import storage.FileUser;
@@ -23,8 +22,11 @@ public class Login {
         System.out.println("1:Đăng nhập");
         System.out.println("2:Đăng ký");
         System.out.println("----------------------");
-        System.out.println("3:kHÁCH HÀNG");
-        System.out.println("4:Exit");
+        System.out.println("---kHÁCH HÀNG---");
+        System.out.println("3:Xem hàng");
+        System.out.println("4:thêm vào giỏ hàng");
+        System.out.println("5:thanh toán");
+
         int choice = scanner.nextInt();
         switch (choice){
             case 1:
@@ -37,6 +39,9 @@ public class Login {
                 userList.add(creatUser());
                 break;
             case 3:
+                duclap.showAll();
+                break;
+            case 4:
 
         }
     }

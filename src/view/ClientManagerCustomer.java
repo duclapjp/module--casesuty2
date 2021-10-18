@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
-public class ClientCustomer {
+public class ClientManagerCustomer {
     private static Scanner scanner =new Scanner(System.in);
     private static List<Customer> customerList;
 

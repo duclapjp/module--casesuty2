@@ -6,8 +6,8 @@ import java.util.Scanner;
 public class RunAdmin {
 
     public void runAdmin() throws IOException {
-        ClientProduct clientProduct = new ClientProduct();
-        ClientCustomer clientCustomer  = new ClientCustomer();
+        ClientManagerProduct clientProduct = new ClientManagerProduct();
+        ClientManagerCustomer clientCustomer  = new ClientManagerCustomer();
         Scanner scanner = new Scanner(System.in);
         System.out.println("CHỌN CHỨC NĂNG");
         System.out.println("---MENU---");

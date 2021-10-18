@@ -11,7 +11,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
-public class ClientProduct {
+public class ClientManagerProduct {
     private static Scanner scanner = new Scanner(System.in);
     private static List<Product> productList;
 
