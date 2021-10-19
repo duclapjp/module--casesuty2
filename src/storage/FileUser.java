@@ -1,7 +1,6 @@
 package storage;
 
 import molder.login.User;
-import molder.product.Product;
 
 import java.io.*;
 import java.util.ArrayList;

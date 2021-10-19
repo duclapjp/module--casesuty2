@@ -8,14 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserManager implements GeneralManager<User> {
-    List<User> userList = new ArrayList<>();
+    private List<User> userList;
     private FileUser fileUser;
 
     public UserManager(FileUser fileUser) {
         this.fileUser = fileUser;
     }
 
-    public FileUser getFileUser() {
+    public  FileUser getFileUser() {
         return fileUser;
     }
 
@@ -40,7 +40,9 @@ public class UserManager implements GeneralManager<User> {
 
     @Override
     public void showAll() {
-
+        for (User u:userList) {
+            System.out.println(u.toString());
+        }
     }
 
     @Override
@@ -70,4 +72,10 @@ public class UserManager implements GeneralManager<User> {
         return false;
     }
 
+    @Override
+    public String toString() {
+        return "UserManager{" +
+                "userList=" + userList +
+                '}';
+    }
 }
