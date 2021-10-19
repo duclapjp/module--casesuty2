@@ -10,6 +10,13 @@ import java.util.List;
 public class UserManager implements GeneralManager<User> {
     private List<User> userList;
     private FileUser fileUser;
+    private static UserManager userManager;
+    public static UserManager getInstance(){
+        if (userManager==null){
+            userManager = new UserManager();
+        }
+        return userManager;
+    }
 
     public UserManager(FileUser fileUser) {
         this.fileUser = fileUser;

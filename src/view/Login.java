@@ -12,6 +12,7 @@ import storage.FileProduct;
 import storage.FileUser;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -37,8 +38,6 @@ public class Login {
             System.out.println("---CHỌN CHỨC NĂNG---");
             System.out.println("---ADMIN---");
             System.out.println("1:Đăng nhập");
-            System.out.println("2:Đăng ký");
-            System.out.println("7:Hiện danh sách User");
             System.out.println("----------------------");
             System.out.println("---kHÁCH HÀNG---");
             System.out.println("3:Xem hàng");
@@ -55,10 +54,6 @@ public class Login {
                         System.out.println("sai thông tin đăng nhập");
                     }
                     break;
-                case 2:
-                    lapLogin.add(creatUser());
-                    System.out.println("đăng ký thành công!");
-                    break;
                 case 3:
                     System.out.println("---Sản Phẩm---");
                     productManager.showAll();
@@ -68,20 +63,17 @@ public class Login {
                     Product product = productList.get(index);
                     System.out.println("nhập số lượng muốn mua");
                     int n = scanner.nextInt();
-                    if(n>product.getQuantity()){
+                    if (product.getQuantity()==0) System.out.println("hết hàng");
+                    if (n > product.getQuantity()) {
                         System.out.println("vui lòng liên hệ trực tiếp cửa hàng vì số lượng quá lớn");
                         break;
                     }else {
-                        int quantity = product.getQuantity();
-                        product.setQuantity(n);
-                        billManager.add(product);
-                        productList.get(index).setQuantity(quantity - n);
-                        productManager.setProductList(productList);
+                        addBill(product, n);
                         break;
                     }
                 case 5:
-                        billManager.showAll();
-                        break;
+                    billManager.showAll();
+                    break;
                 case 6:
                     System.out.println("---Số tiền phải trả là:---");
                     System.out.println(billManager.Pay());
@@ -95,21 +87,27 @@ public class Login {
             }
         }
     }
-    public static String getCodeProduct(){
+
+    private static void addBill(Product product, int n) throws IOException {
+        int q = product.getQuantity();
+        product.setQuantity(q- n);
+        int quantity = n;
+        String codeProduct = product.getCodeProduct();
+        String name = product.getName();
+        String description = product.getDescription();
+        double price = product.getPrice();
+        LocalDate localDate = product.getImportDate();
+        Product newP = new Product(name, quantity, codeProduct, price, localDate, description);
+        billManager.add(newP);
+    }
+
+    public static String getCodeProduct() {
         System.out.println("nhập vào mã sản phẩm");
         scanner.nextLine();
         String code = scanner.nextLine();
         return code;
     }
-    public static User creatUser() {
-        User user = new User();
-        System.out.println("nhập tên đăng nhập");
-        scanner.nextLine();
-        user.setNickName(scanner.nextLine());
-        System.out.println("nhập vào pass");
-        user.setPass(scanner.nextLine());
-        return user;
-    }
+
 
     public static String getNickName() {
         System.out.println("nhập vào tên đăng nhập");
