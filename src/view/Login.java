@@ -1,19 +1,15 @@
 package view;
 
 import controller.BillManager;
-import controller.CustomerManager;
 import controller.ProductManager;
 import controller.UserManager;
 import molder.Bill;
 import molder.login.User;
 import molder.product.Product;
-import storage.FileCustomer;
 import storage.FileProduct;
 import storage.FileUser;
-
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -38,6 +34,7 @@ public class Login {
             System.out.println("---CHỌN CHỨC NĂNG---");
             System.out.println("---ADMIN---");
             System.out.println("1:Đăng nhập");
+            System.out.println("2:Đăng ký");
             System.out.println("----------------------");
             System.out.println("---kHÁCH HÀNG---");
             System.out.println("3:Xem hàng");
@@ -54,12 +51,15 @@ public class Login {
                         System.out.println("sai thông tin đăng nhập");
                     }
                     break;
+                case 2:
+                    lapLogin.add(creatUser());
+                    break;
                 case 3:
                     System.out.println("---Sản Phẩm---");
                     productManager.showAll();
                     break;
                 case 4:
-                    int index = productManager.getIndexByCodeProduct(getCodeProduct());
+                    int index = productManager.getIndexByName(getCodeProduct());
                     Product product = productList.get(index);
                     System.out.println("nhập số lượng muốn mua");
                     int n = scanner.nextInt();
@@ -91,6 +91,7 @@ public class Login {
     private static void addBill(Product product, int n) throws IOException {
         int q = product.getQuantity();
         product.setQuantity(q- n);
+
         int quantity = n;
         String codeProduct = product.getCodeProduct();
         String name = product.getName();
@@ -100,7 +101,14 @@ public class Login {
         Product newP = new Product(name, quantity, codeProduct, price, localDate, description);
         billManager.add(newP);
     }
-
+    public static Bill creatBill(){
+        Bill bill =  new Bill();
+        System.out.println("nhập vào tên:");
+        bill.setNameCustomer(scanner.nextLine());
+        System.out.println("nhập vào địa chỉ");
+        bill.setAddress(scanner.nextLine());
+        return bill;
+    }
     public static String getCodeProduct() {
         System.out.println("nhập vào mã sản phẩm");
         scanner.nextLine();
@@ -121,5 +129,13 @@ public class Login {
         String pass = scanner.nextLine();
         return pass;
     }
-
+    public static User creatUser() {
+        User user = new User();
+        System.out.println("nhập tên đăng nhập");
+        scanner.nextLine();
+        user.setNickName(scanner.nextLine());
+        System.out.println("nhập vào pass");
+        user.setPass(scanner.nextLine());
+        return user;
+    }
 }

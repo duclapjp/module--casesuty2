@@ -10,13 +10,6 @@ import java.util.List;
 public class UserManager implements GeneralManager<User> {
     private List<User> userList;
     private FileUser fileUser;
-    private static UserManager userManager;
-    public static UserManager getInstance(){
-        if (userManager==null){
-            userManager = new UserManager();
-        }
-        return userManager;
-    }
 
     public UserManager(FileUser fileUser) {
         this.fileUser = fileUser;
@@ -60,14 +53,22 @@ public class UserManager implements GeneralManager<User> {
 
     @Override
     public void edit(int index, User user) throws IOException {
-
+        userList.set(index,user);
+        fileUser.writeFile(userList);
     }
 
 
     @Override
     public void delete(int index) throws IOException {
-
+        userList.remove(index);
+        fileUser.writeFile(userList);
     }
+
+    @Override
+    public int getIndexByName(String name) {
+        return 0;
+    }
+
     public boolean checkUser(String nickName,String pass){
         for (int i = 0; i < userList.size(); i++) {
             if (userList.get(i).getNickName().equals(nickName)){

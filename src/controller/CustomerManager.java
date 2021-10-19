@@ -44,7 +44,14 @@ public class CustomerManager implements GeneralManager<Customer> {
        fileCustomer.writeFile(customerList);
     }
 
-
+    public int getIndexByName(String name){
+        for (int i = 0; i < customerList.size(); i++) {
+            if (customerList.get(i).getName().equals(name)){
+                return i;
+            }
+        }
+        return -1;
+    }
     @Override
     public void edit(int index, Customer customer) throws IOException {
         customerList.set(index, customer);

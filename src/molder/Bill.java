@@ -2,7 +2,7 @@ package molder;
 
 public class Bill {
     private String nameCustomer;
-    private String codeBill;
+    private String address;
 
     public String getNameCustomer() {
         return nameCustomer;
@@ -12,12 +12,21 @@ public class Bill {
         this.nameCustomer = nameCustomer;
     }
 
-    public String getCodeBill() {
-        return codeBill;
+
+    public String getAddress() {
+        return address;
     }
 
-    public void setCodeBill(String codeBill) {
-        this.codeBill = codeBill;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
+    @Override
+    public String toString() {
+        return "Bill{" +
+                "nameCustomer='" + nameCustomer + '\'' +
+                ", codeBill='" +
+                ", address='" + address + '\'' +
+                '}';
+    }
 }

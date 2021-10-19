@@ -8,4 +8,5 @@ public interface GeneralManager<T> {
     void add(T t) throws IOException;
     void edit(int index,T t) throws IOException;
     void delete(int index) throws IOException;
+    int getIndexByName(String name);
 }

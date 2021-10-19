@@ -4,11 +4,9 @@ import controller.ProductManager;
 import molder.product.Product;
 import molder.product.ProductFactory;
 import molder.product.ProductType;
-import storage.FileProduct;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Scanner;
 
 public class ClientManagerProduct {
@@ -39,13 +37,13 @@ public class ClientManagerProduct {
                 case 3:
                     String codeProduct1 = getCodeProduct();
                     Product newPoduct = creatProduct();
-                    int index1 = duclap.getIndexByCodeProduct(codeProduct1);
+                    int index1 = duclap.getIndexByName(codeProduct1);
                     duclap.edit(index1,newPoduct);
                     duclap.showAll();
                     break;
                 case 4:
                     String codeProduct2 = getCodeProduct();
-                    int index2 = duclap.getIndexByCodeProduct(codeProduct2);
+                    int index2 = duclap.getIndexByName(codeProduct2);
                     duclap.delete(index2);
                     duclap.showAll();
                     break;

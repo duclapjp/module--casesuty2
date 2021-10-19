@@ -40,7 +40,7 @@ public class ProductManager implements GeneralManager<Product> {
             System.out.println(p.toString());
         }
     }
-    public int getIndexByCodeProduct(String codeProduct){
+    public int getIndexByName(String codeProduct){
        int index = 0;
         for (int i = 0; i < productList.size(); i++) {
             if (productList.get(i).getCodeProduct().equals(codeProduct)){

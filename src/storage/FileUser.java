@@ -18,7 +18,7 @@ public class FileUser {
 
     public  void writeFile(List<User> userList) throws IOException {
         try {
-            OutputStream os = new FileOutputStream(new File("user.txt"));
+            OutputStream os = new FileOutputStream("user.txt");
             ObjectOutputStream oos = new ObjectOutputStream(os);
             oos.writeObject(userList);
 
@@ -38,14 +38,10 @@ public class FileUser {
         }
         if (file.length()==0) return userList;
         try{
-            InputStream ips = new FileInputStream(new File("user.txt"));
+            InputStream ips = new FileInputStream("user.txt");
             ObjectInputStream ois = new ObjectInputStream(ips);
             userList = (List<User>) ois.readObject();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
         return userList;

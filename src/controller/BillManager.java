@@ -1,5 +1,6 @@
 package controller;
 
+import molder.Bill;
 import molder.product.Product;
 
 import java.io.IOException;
@@ -9,7 +10,7 @@ import java.util.List;
 public class BillManager implements GeneralManager<Product> {
     private static List<Product> billList = new ArrayList<>();
     private static BillManager billManager;
-
+    private Bill bill;
     public static BillManager getInstance(){
         if (billManager == null){
             billManager = new BillManager();
@@ -56,17 +57,26 @@ public class BillManager implements GeneralManager<Product> {
     @Override
     public void add(Product product) throws IOException {
         billList.add(product);
-
     }
 
     @Override
     public void edit(int index, Product product) throws IOException {
-
+        billList.set(index,product);
     }
 
     @Override
     public void delete(int index) throws IOException {
+        billList.remove(index);
+    }
 
+    @Override
+    public int getIndexByName(String name) {
+        for (int i = 0; i < billList.size(); i++) {
+            if (billList.get(i).getName().equals(name)){
+                return i;
+            }
+        }
+        return -1;
     }
 
     @Override
