@@ -10,8 +10,20 @@ import java.util.List;
 public class ProductManager implements GeneralManager<Product> {
    private static List<Product> productList = new ArrayList<>();
    private FileProduct fileProduct;
+   private static ProductManager productManager;
+
+   public static ProductManager getInstance(){
+       if (productManager == null){
+           productManager = new ProductManager();
+       }
+       return productManager;
+   }
+
    public List<Product> getProductList() {
         return productList;
+    }
+
+    public ProductManager() {
     }
 
     public ProductManager(FileProduct fileProduct) {
@@ -66,4 +78,5 @@ public class ProductManager implements GeneralManager<Product> {
             }
         }
     }
+
 }

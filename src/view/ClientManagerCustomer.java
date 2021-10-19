@@ -26,7 +26,7 @@ public class ClientManagerCustomer {
             System.out.println("2:Hiển thị danh sách khách hàng");
             System.out.println("3:Tìm kiếm");
             System.out.println("4:Khách hàng tiềm năng");
-            System.out.println("5:Exit");
+            System.out.println("5:Back");
             int choice = scanner.nextInt();
             switch (choice){
                 case 1:

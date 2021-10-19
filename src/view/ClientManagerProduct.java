@@ -13,14 +13,10 @@ import java.util.Scanner;
 
 public class ClientManagerProduct {
     private static Scanner scanner = new Scanner(System.in);
-    private static List<Product> productList;
 
 
     public void runProduct() throws IOException {
-        FileProduct fileProduct = FileProduct.getInstance();
-        ProductManager duclap = new ProductManager(fileProduct);
-        productList = fileProduct.readFile();
-        duclap.setProductList(productList);
+        ProductManager duclap = ProductManager.getInstance();
         boolean check = true;
         while (check) {
             System.out.println("chọn chức năng");
@@ -30,7 +26,7 @@ public class ClientManagerProduct {
             System.out.println("3:Sửa");
             System.out.println("4:Xóa");
             System.out.println("5:Tìm kiếm");
-            System.out.println("6:Exit");
+            System.out.println("6:Back");
             int choice = scanner.nextInt();
             switch (choice) {
                 case 1:
