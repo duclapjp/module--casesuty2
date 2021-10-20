@@ -1,10 +1,10 @@
 package view;
 
 import controller.*;
-import molder.Bill;
 import molder.login.User;
 import molder.product.Product;
 import storage.FileProduct;
+import storage.FileRevenue;
 import storage.FileUser;
 
 import java.io.IOException;
@@ -14,15 +14,18 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Login {
-    private static Scanner scanner = new Scanner(System.in);
-    private static Scanner number = new Scanner(System.in);
-    private static ProductManager productManager = ProductManager.getInstance();
-    private static List<User> userList;
-    private static BillManager billManager = BillManager.getInstance();
-    private static AccountExample accountExample = new AccountExample();
-    private static PriceComparator priceComparator = new PriceComparator();
-    private static FileUser fileUser = FileUser.getInstance();
-    private static UserManager lapLogin = new UserManager(fileUser);
+    private static final Scanner scanner = new Scanner(System.in);
+    private static final Scanner number = new Scanner(System.in);
+    private static final ProductManager productManager = ProductManager.getInstance();
+    private static final BillManager billManager = BillManager.getInstance();
+    private static final AccountExample accountExample = new AccountExample();
+    private static final PriceComparator priceComparator = new PriceComparator();
+    private static final FileUser fileUser = FileUser.getInstance();
+    private static final UserManager lapLogin = new UserManager(fileUser);
+
+    private static final RevenueManager revenueManager = new RevenueManager();
+
+    private static FileRevenue fileRevenue = new FileRevenue();
     public static void main(String[] args) throws IOException {
         FileProduct fileProduct = FileProduct.getInstance();
         List<Product> productList = fileProduct.readFile();
@@ -30,7 +33,7 @@ public class Login {
         RunAdmin runAdmin = new RunAdmin();
 
 
-        userList = fileUser.readFile();
+        List<User> userList = fileUser.readFile();
         lapLogin.setUserList(userList);
 
         boolean check = true;
@@ -82,10 +85,12 @@ public class Login {
                     break;
                 case 6:
                     System.out.println("---Số tiền phải trả là:---");
-                    System.out.println(billManager.Pay());
+                    double money = billManager.Pay();
+                    System.out.println(money);
+                    revenueManager.setRevenue((int)money);
                     break;
                 case 7:
-                    Collections.sort(productList,priceComparator);
+                    Collections.sort(productList, priceComparator);
                     productManager.showAll();
                     break;
                 case 8:
@@ -99,55 +104,38 @@ public class Login {
     private static void addBill(Product product, int n) throws IOException {
         int q = product.getQuantity();
         product.setQuantity(q - n);
-
-        int quantity = n;
         String codeProduct = product.getCodeProduct();
         String name = product.getName();
         String description = product.getDescription();
         double price = product.getPrice();
         LocalDate localDate = product.getImportDate();
-        Product newP = new Product(name, quantity, codeProduct, price, localDate, description);
+        Product newP = new Product(name, n, codeProduct, price, localDate, description);
         billManager.add(newP);
-    }
-
-    public static Bill creatBill() {
-        Bill bill = new Bill();
-        System.out.println("nhập vào tên:");
-        bill.setNameCustomer(scanner.nextLine());
-        System.out.println("nhập vào địa chỉ");
-        bill.setAddress(scanner.nextLine());
-        return bill;
     }
 
     public static String getCodeProduct() {
         System.out.println("nhập vào mã sản phẩm");
-        scanner.nextLine();
-        String code = scanner.nextLine();
-        return code;
+        return scanner.nextLine();
     }
 
 
     public static String getNickName() {
         System.out.println("nhập vào tên đăng nhập");
-        scanner.nextLine();
-        String nickName = scanner.nextLine();
-        return nickName;
+        return scanner.nextLine();
     }
 
     public static String getPass() {
         System.out.println("nhập vào pass");
-        String pass = scanner.nextLine();
-        return pass;
+        return scanner.nextLine();
     }
 
     public static User creatUser() {
         User user = new User();
-        System.out.println("nhập tên đăng nhập");
+        System.out.println("Nhập tên đăng nhập");
         String name = scanner.nextLine();
         if (accountExample.validate(name)) {
             if (lapLogin.checkNickName(name)) {
-                System.out.println("tên đăng nhập đã tồn tại");
-                creatUser();
+                System.out.println("Tên đăng nhập đã tồn tại");
             } else {
                 user.setNickName(name);
                 System.out.println("nhập vào pass");
@@ -157,7 +145,6 @@ public class Login {
             }
         } else {
             System.out.println("Tên tài khoản chứa ít nhất 6 ký tự và không chứa ký tự đặc biệt");
-            creatUser();
         }
         return user;
     }

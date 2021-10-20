@@ -19,7 +19,7 @@ public class FileProduct {
 
     public  void writeFile(List<Product> productList) throws IOException {
         try {
-            OutputStream os = new FileOutputStream(new File("product.txt"));
+            OutputStream os = new FileOutputStream("product.txt");
             ObjectOutputStream oos = new ObjectOutputStream(os);
             oos.writeObject(productList);
 

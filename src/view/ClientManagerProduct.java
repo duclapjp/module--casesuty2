@@ -1,18 +1,20 @@
 package view;
 
 import controller.ProductManager;
+import controller.RevenueManager;
 import molder.product.Product;
 import molder.product.ProductFactory;
 import molder.product.ProductType;
+import storage.FileRevenue;
 
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Scanner;
 
 public class ClientManagerProduct {
-    private static Scanner scanner = new Scanner(System.in);
-
-
+    private static final Scanner scanner = new Scanner(System.in);
+    private static RevenueManager revenueManager = new RevenueManager();
+    private static FileRevenue fileRevenue = new FileRevenue();
     public void runProduct() throws IOException {
         ProductManager duclap = ProductManager.getInstance();
         boolean check = true;
@@ -24,7 +26,9 @@ public class ClientManagerProduct {
             System.out.println("3:Sửa");
             System.out.println("4:Xóa");
             System.out.println("5:Tìm kiếm");
-            System.out.println("6:Back");
+            System.out.println("6:Tổng doanh thu đến thời điểm hiện tại");
+            System.out.println("7:Tổng kết tiền cuối ngày");
+            System.out.println("8:Back");
             int choice = scanner.nextInt();
             switch (choice) {
                 case 1:
@@ -52,6 +56,15 @@ public class ClientManagerProduct {
                     duclap.checkProduct(code);
                     break;
                 case 6:
+                    System.out.println("Doanh thu tới thời điểm hiện tại là:");
+                    fileRevenue.readFile();
+                    break;
+                case 7:
+                    System.out.println("Tổng số tiền bán được trong ngày là:");
+                    System.out.println(revenueManager.getRevenue());
+                    revenueManager.setRevenue(0);
+                    break;
+                case 8:
                     check = false;
                     break;
             }
@@ -61,8 +74,7 @@ public class ClientManagerProduct {
     private String getCodeProduct() {
         System.out.println("nhập vào mã sản phẩm");
         scanner.nextLine();
-        String codeProduct = scanner.nextLine();
-        return codeProduct;
+        return scanner.nextLine();
     }
 
     public Product creatP() {

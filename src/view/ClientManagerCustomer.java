@@ -9,14 +9,13 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ClientManagerCustomer {
-    private static Scanner scanner = new Scanner(System.in);
-    private static List<Customer> customerList;
+    private static final Scanner scanner = new Scanner(System.in);
 
 
     public void runCustomer() throws IOException {
         FileCustomer fileCustomer = FileCustomer.getInstance();
         CustomerManager lap = new CustomerManager(fileCustomer);
-        customerList = FileCustomer.readFile();
+        List<Customer> customerList = FileCustomer.readFile();
         lap.setCustomerList(customerList);
         boolean check = true;
         while (check) {
@@ -60,8 +59,7 @@ public class ClientManagerCustomer {
     public static String getName() {
         System.out.println("nhập vào tên khách hàng");
         scanner.nextLine();
-        String name = scanner.nextLine();
-        return name;
+        return scanner.nextLine();
     }
 
     public Customer creatCustomer() {
@@ -74,7 +72,6 @@ public class ClientManagerCustomer {
         System.out.println("nhập số điện thoại");
         scanner.nextLine();
         String phoneNumber = scanner.nextLine();
-        Customer customer = new Customer(name, address, countOfBuy, phoneNumber);
-        return customer;
+        return new Customer(name, address, countOfBuy, phoneNumber);
     }
 }
