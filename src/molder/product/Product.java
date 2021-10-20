@@ -81,4 +81,5 @@ public class Product implements Serializable {
                 ", description='" + description + '\'' +
                 '}';
     }
+
 }

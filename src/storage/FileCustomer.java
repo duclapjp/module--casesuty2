@@ -37,14 +37,10 @@ public class FileCustomer {
         }
         if (file.length()==0) return customerList;
         try{
-            InputStream ips = new FileInputStream(new File("customer.txt"));
+            InputStream ips = new FileInputStream("customer.txt");
             ObjectInputStream ois = new ObjectInputStream(ips);
             customerList = (List<Customer>) ois.readObject();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
         return customerList;

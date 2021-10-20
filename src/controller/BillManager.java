@@ -1,6 +1,5 @@
 package controller;
 
-import molder.Bill;
 import molder.product.Product;
 
 import java.io.IOException;
@@ -10,7 +9,6 @@ import java.util.List;
 public class BillManager implements GeneralManager<Product> {
     private static List<Product> billList = new ArrayList<>();
     private static BillManager billManager;
-    private Bill bill;
     public static BillManager getInstance(){
         if (billManager == null){
             billManager = new BillManager();

@@ -10,6 +10,14 @@ import java.util.List;
 public class UserManager implements GeneralManager<User> {
     private List<User> userList;
     private FileUser fileUser;
+    private static UserManager userManager;
+
+    public static UserManager getInstance(){
+        if (userManager == null){
+            userManager = new UserManager();
+        }
+        return userManager;
+    }
 
     public UserManager(FileUser fileUser) {
         this.fileUser = fileUser;
@@ -66,9 +74,21 @@ public class UserManager implements GeneralManager<User> {
 
     @Override
     public int getIndexByName(String name) {
-        return 0;
+        for (int i = 0; i < userList.size(); i++) {
+            if (userList.get(i).getNickName().equals(name)){
+                return i;
+            }
+        }
+        return -1;
     }
-
+    public boolean checkNickName(String name){
+        for (int i = 0; i < userList.size(); i++) {
+            if (userList.get(i).getNickName().equals(name)){
+                return true;
+            }
+        }
+        return false;
+    }
     public boolean checkUser(String nickName,String pass){
         for (int i = 0; i < userList.size(); i++) {
             if (userList.get(i).getNickName().equals(nickName)){
