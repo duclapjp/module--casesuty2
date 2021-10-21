@@ -22,20 +22,19 @@ public class Login {
     private static final PriceComparator priceComparator = new PriceComparator();
     private static final FileUser fileUser = FileUser.getInstance();
     private static final UserManager lapLogin = new UserManager(fileUser);
+    private static final FileRevenue fileRevenue =FileRevenue.getInstance();
+    private static final RevenueManager revenueManager = new RevenueManager(fileRevenue);
 
-    private static final RevenueManager revenueManager = new RevenueManager();
-
-    private static FileRevenue fileRevenue = new FileRevenue();
     public static void main(String[] args) throws IOException {
+
         FileProduct fileProduct = FileProduct.getInstance();
         List<Product> productList = fileProduct.readFile();
-        productManager.setProductList(productList);
+        productManager.setProductList(productList);                    //sản phẩm
         RunAdmin runAdmin = new RunAdmin();
-
-
         List<User> userList = fileUser.readFile();
-        lapLogin.setUserList(userList);
+        lapLogin.setUserList(userList);                                //khách hàng
 
+        revenueManager.setRevenue(fileRevenue.readFile());            //doanh thu
         boolean check = true;
         while (check) {
             System.out.println("---CHỌN CHỨC NĂNG---");
@@ -78,6 +77,9 @@ public class Login {
                         break;
                     } else {
                         addBill(product, n);
+                        product.setQuantity(product.getQuantity()- n);
+                        productList.set(index,product);
+                        fileProduct.writeFile(productList);
                         break;
                     }
                 case 5:
@@ -87,7 +89,7 @@ public class Login {
                     System.out.println("---Số tiền phải trả là:---");
                     double money = billManager.Pay();
                     System.out.println(money);
-                    revenueManager.setRevenue((int)money);
+                    revenueManager.setRevenue(money);
                     break;
                 case 7:
                     Collections.sort(productList, priceComparator);
@@ -102,8 +104,6 @@ public class Login {
 
 
     private static void addBill(Product product, int n) throws IOException {
-        int q = product.getQuantity();
-        product.setQuantity(q - n);
         String codeProduct = product.getCodeProduct();
         String name = product.getName();
         String description = product.getDescription();

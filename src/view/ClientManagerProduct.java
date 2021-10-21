@@ -60,8 +60,8 @@ public class ClientManagerProduct {
                     fileRevenue.readFile();
                     break;
                 case 7:
-                    System.out.println("Tổng số tiền bán được trong ngày là:");
-                    System.out.println(revenueManager.getRevenue());
+                    System.out.println("Doanh thu tới thời điểm hiện tại là:");
+                    fileRevenue.readFile();
                     revenueManager.setRevenue(0);
                     break;
                 case 8:

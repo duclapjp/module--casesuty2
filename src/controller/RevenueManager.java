@@ -26,7 +26,7 @@ public class RevenueManager implements Serializable {
 
     public void setRevenue(double revenue) throws IOException {
         this.revenue += revenue;
-        fileRevenue.writeFile((int)revenue);
+        fileRevenue.writeFile(getRevenue());
     }
 
     @Override

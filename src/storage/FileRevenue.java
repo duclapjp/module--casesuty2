@@ -6,7 +6,15 @@ import controller.RevenueManager;
 import java.io.*;
 
 public class FileRevenue {
-    public String readFile() throws IOException {
+    private static FileRevenue fileRevenue;
+    public static FileRevenue getInstance(){
+        if (fileRevenue==null){
+            fileRevenue = new FileRevenue();
+        }
+        return fileRevenue;
+    }
+
+    public  double readFile() throws IOException {
         RevenueManager revenue = new RevenueManager();
         File file = new File("revenue.txt");
         if(!file.exists()){
@@ -15,15 +23,18 @@ public class FileRevenue {
         FileReader  is = new FileReader(file);
         BufferedReader bufferedReader = new BufferedReader(is);
         String line = "";
+        double num=0;
         while ((line= bufferedReader.readLine())!=null){
-            System.out.println(line);
+            num = Double.parseDouble(line);
         }
-        return line;
+        bufferedReader.close();
+        System.out.println(num);
+        return num;
     }
-    public void writeFile(int revenue) throws IOException {
+    public void writeFile(double revenue) throws IOException {
         FileWriter fileWriter  = new FileWriter(new File("revenue.txt"));
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-        bufferedWriter.write(revenue);
+        bufferedWriter.write(""+revenue);
         bufferedWriter.close();
     }
 }
