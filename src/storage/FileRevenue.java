@@ -28,7 +28,6 @@ public class FileRevenue {
             num = Double.parseDouble(line);
         }
         bufferedReader.close();
-        System.out.println(num);
         return num;
     }
     public void writeFile(double revenue) throws IOException {

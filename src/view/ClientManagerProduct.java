@@ -9,13 +9,14 @@ import storage.FileRevenue;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class ClientManagerProduct {
     private static final Scanner scanner = new Scanner(System.in);
     private static RevenueManager revenueManager = new RevenueManager();
     private static FileRevenue fileRevenue = new FileRevenue();
-    public void runProduct() throws IOException {
+    public void runProduct() throws IOException, InputMismatchException {
         ProductManager duclap = ProductManager.getInstance();
         boolean check = true;
         while (check) {
@@ -57,11 +58,11 @@ public class ClientManagerProduct {
                     break;
                 case 6:
                     System.out.println("Doanh thu tới thời điểm hiện tại là:");
-                    fileRevenue.readFile();
+                    System.out.println(fileRevenue.readFile());
                     break;
                 case 7:
                     System.out.println("Doanh thu tới thời điểm hiện tại là:");
-                    fileRevenue.readFile();
+                    System.out.println(fileRevenue.readFile());
                     revenueManager.setRevenue(0);
                     break;
                 case 8:
@@ -71,13 +72,13 @@ public class ClientManagerProduct {
         }
     }
 
-    private String getCodeProduct() {
+    private String getCodeProduct() throws InputMismatchException {
         System.out.println("nhập vào mã sản phẩm");
         scanner.nextLine();
         return scanner.nextLine();
     }
 
-    public Product creatP() {
+    public Product creatP() throws InputMismatchException {
         System.out.println("nhập vào kiểu sản phẩm muốn thêm:BED,TABLE,CHAIR,CABINET");
         scanner.nextLine();
         String name = scanner.nextLine();
@@ -100,7 +101,7 @@ public class ClientManagerProduct {
         return null;
     }
 
-    public Product creatProduct() {
+    public Product creatProduct() throws InputMismatchException {
         Product product = creatP();
         int random = (int) Math.floor(Math.random()*100+1);
         System.out.println("nhập tên sản phẩm");

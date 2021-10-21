@@ -5,6 +5,7 @@ import molder.Customer;
 import storage.FileCustomer;
 
 import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -12,7 +13,7 @@ public class ClientManagerCustomer {
     private static final Scanner scanner = new Scanner(System.in);
 
 
-    public void runCustomer() throws IOException {
+    public void runCustomer() throws IOException , InputMismatchException {
         FileCustomer fileCustomer = FileCustomer.getInstance();
         CustomerManager lap = new CustomerManager(fileCustomer);
         List<Customer> customerList = FileCustomer.readFile();
@@ -56,13 +57,13 @@ public class ClientManagerCustomer {
         }
     }
 
-    public static String getName() {
+    public static String getName() throws InputMismatchException{
         System.out.println("nhập vào tên khách hàng");
         scanner.nextLine();
         return scanner.nextLine();
     }
 
-    public Customer creatCustomer() {
+    public Customer creatCustomer() throws InputMismatchException{
         System.out.println("nhập tên");
         String name = scanner.nextLine();
         System.out.println("nhập địa chỉ");

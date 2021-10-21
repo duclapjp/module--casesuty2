@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserManager implements GeneralManager<User> {
-    private List<User> userList;
+    private List<User> userList = new ArrayList<>();
     private FileUser fileUser;
     private static UserManager userManager;
 

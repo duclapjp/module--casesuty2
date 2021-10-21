@@ -31,8 +31,9 @@ public class ProductManager implements GeneralManager<Product>{
         this.fileProduct = fileProduct;
     }
 
-    public void setProductList(List<Product> productList) {
+    public void setProductList(List<Product> productList) throws IOException {
         this.productList = productList;
+        fileProduct.writeFile(productList);
     }
 
 

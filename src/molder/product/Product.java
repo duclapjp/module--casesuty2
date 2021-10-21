@@ -23,6 +23,7 @@ public class Product implements Serializable {
     }
 
 
+
     public String getCodeProduct() {
         return codeProduct;
     }

@@ -83,4 +83,12 @@ public class BillManager implements GeneralManager<Product> {
                 "billManager=" + billManager +
                 '}';
     }
+    public int getIndexByCodeProduct(String codeProduct){
+        for (int i = 0; i < billList.size(); i++) {
+            if (billList.get(i).getCodeProduct().equals(codeProduct)){
+                return i;
+            }
+        }
+        return -1;
+    }
 }
