@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class ProductManager implements GeneralManager<Product>{
+public class ProductManager implements GeneralManager<Product> {
     private static List<Product> productList = new ArrayList<>();
     private FileProduct fileProduct = FileProduct.getInstance();
     private static ProductManager productManager;

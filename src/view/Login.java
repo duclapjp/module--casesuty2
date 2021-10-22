@@ -156,22 +156,22 @@ public class Login {
     }
 
     public static User creatUser() throws InputMismatchException {
-        User user = new User();
-        System.out.println("Nhập tên đăng nhập");
-        String name = scanner.nextLine();
-        if (accountExample.validate(name)) {
-            if (lapLogin.checkNickName(name)) {
-                System.out.println("Tên đăng nhập đã tồn tại");
+            User user = new User();
+            System.out.println("Nhập tên đăng nhập");
+            String name = scanner.nextLine();
+            if (accountExample.validate(name)) {
+                if (lapLogin.checkNickName(name)) {
+                    System.out.println("Tên đăng nhập đã tồn tại");
+                } else {
+                    user.setNickName(name);
+                    System.out.println("nhập vào pass");
+                    String pass = scanner.nextLine();
+                    user.setPass(pass);
+                    return user;
+                }
             } else {
-                user.setNickName(name);
-                System.out.println("nhập vào pass");
-                String pass = scanner.nextLine();
-                user.setPass(pass);
-                return user;
+                System.out.println("Tên tài khoản chứa ít nhất 6 ký tự và không chứa ký tự đặc biệt");
             }
-        } else {
-            System.out.println("Tên tài khoản chứa ít nhất 6 ký tự và không chứa ký tự đặc biệt");
-        }
-        return user;
+            return user;
     }
 }

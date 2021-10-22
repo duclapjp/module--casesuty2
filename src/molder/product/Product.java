@@ -71,7 +71,7 @@ public class Product implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
-   
+
     @Override
     public String toString() {
         return "Customer{" +
@@ -82,5 +82,4 @@ public class Product implements Serializable {
                 ", description='" + description + '\'' +
                 '}';
     }
-
 }
