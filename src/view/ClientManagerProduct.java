@@ -29,7 +29,8 @@ public class ClientManagerProduct {
             System.out.println("5:Tìm kiếm");
             System.out.println("6:Tổng doanh thu đến thời điểm hiện tại");
             System.out.println("7:Tổng kết tiền cuối ngày");
-            System.out.println("8:Back");
+            System.out.println("8:Kiểm tra những mặt hàng tồn kho trên 90 ngày");
+            System.out.println("9:Back");
             int choice = scanner.nextInt();
             switch (choice) {
                 case 1:
@@ -66,6 +67,10 @@ public class ClientManagerProduct {
                     revenueManager.setRevenue(0);
                     break;
                 case 8:
+                    System.out.println("Những sản phẩm trên 90 ngày không bán được là :");
+                    duclap.checkOverDate();
+                    break;
+                case 9:
                     check = false;
                     break;
             }

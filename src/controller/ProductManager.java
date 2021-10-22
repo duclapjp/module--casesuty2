@@ -85,4 +85,13 @@ public class ProductManager implements GeneralManager<Product> {
         }
     }
 
+    public void checkOverDate() {
+        for (int i = 0; i < productList.size(); i++) {
+            if (productList.get(i).getImportDate().isBefore(productList.get(i).getImportDate().plusDays(90))) {
+                if (productList.get(i).getQuantity() > 0) {
+                    System.out.println(productList.get(i).toString());
+                }
+            }
+        }
+    }
 }
